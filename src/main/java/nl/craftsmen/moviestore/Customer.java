@@ -34,7 +34,7 @@ public class Customer {
             }
 
             // Add rental to overview
-            double amount = getAmount(rental);
+            double amount = rental.getAmount();
             overviewBuilder.append(String.format("%-20s %5.2f\n", rental.getMovie().getTitle(), amount));
             totalAmount += amount;
         }
@@ -47,27 +47,4 @@ public class Customer {
         return overviewBuilder.toString();
     }
 
-    private double getAmount(Rental rental) {
-        double amount = 0;
-
-        // Determine amounts for each line
-        switch (rental.getMovie().getPriceCode()) {
-            case CHILDRENS:
-                amount += 1.5;
-                if (rental.getDaysRented() > 3) {
-                    amount += (rental.getDaysRented() - 3) * 1.5;
-                }
-                break;
-            case NEW_RELEASE:
-                amount += rental.getDaysRented() * 3;
-                break;
-            case REGULAR:
-                amount += 2;
-                if (rental.getDaysRented() > 2) {
-                    amount += (rental.getDaysRented() - 2) * 1.5;
-                }
-                break;
-        }
-        return amount;
-    }
 }
