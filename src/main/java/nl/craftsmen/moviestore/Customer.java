@@ -21,7 +21,7 @@ public class Customer {
         // Add header to overview
         overviewBuilder.append("Rental overview for " + name + "\n\n");
         for (Rental rental : rentals) {
-            overviewBuilder.append(String.format("%-20s %5.2f\n", rental.getMovie().getTitle(), rental.getAmount()));
+            overviewBuilder.append(String.format("%-20s %5.2f\n", rental.getMovieTitle(), rental.getAmount()));
         }
 
         // Add footer to overview
