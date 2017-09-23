@@ -7,7 +7,6 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 
-import static nl.craftsmen.moviestore.PriceCode.*;
 import static org.junit.Assert.assertEquals;
 
 public class CustomerTest {
@@ -38,7 +37,7 @@ public class CustomerTest {
 
     @Test
     public void childrens_movie_for_1_day() {
-        Movie movie = new Movie("Bambi", CHILDRENS);
+        ChildrensMovie movie = new ChildrensMovie("Bambi");
         Rental rental = new Rental(movie, 1);
 
         customer.addRental(rental);
@@ -49,7 +48,7 @@ public class CustomerTest {
 
     @Test
     public void childrens_movie_for_3_days() {
-        Movie movie = new Movie("Bambi", CHILDRENS);
+        ChildrensMovie movie = new ChildrensMovie("Bambi");
         Rental rental = new Rental(movie, 3);
 
         customer.addRental(rental);
@@ -60,7 +59,7 @@ public class CustomerTest {
 
     @Test
     public void childrens_movie_for_4_days() {
-        Movie movie = new Movie("Bambi", CHILDRENS);
+        ChildrensMovie movie = new ChildrensMovie("Bambi");
         Rental rental = new Rental(movie, 4);
 
         customer.addRental(rental);
@@ -70,7 +69,7 @@ public class CustomerTest {
 
     @Test
     public void childrens_movie_for_5_days() {
-        Movie movie = new Movie("Bambi", CHILDRENS);
+        ChildrensMovie movie = new ChildrensMovie("Bambi");
         Rental rental = new Rental(movie, 5);
 
         customer.addRental(rental);
@@ -80,7 +79,7 @@ public class CustomerTest {
 
     @Test
     public void new_release_movie_for_1_day() {
-        Movie movie = new Movie("American Sniper", NEW_RELEASE);
+        NewMovie movie = new NewMovie("American Sniper");
         Rental rental = new Rental(movie, 1);
 
         customer.addRental(rental);
@@ -90,7 +89,7 @@ public class CustomerTest {
 
     @Test
     public void new_release_movie_for_2_days() {
-        Movie movie = new Movie("American Sniper", NEW_RELEASE);
+        NewMovie movie = new NewMovie("American Sniper");
         Rental rental = new Rental(movie, 2);
 
         customer.addRental(rental);
@@ -100,7 +99,7 @@ public class CustomerTest {
 
     @Test
     public void new_release_movie_for_3_days() {
-        Movie movie = new Movie("American Sniper", NEW_RELEASE);
+        NewMovie movie = new NewMovie("American Sniper");
         Rental rental = new Rental(movie, 3);
 
         customer.addRental(rental);
@@ -110,7 +109,7 @@ public class CustomerTest {
 
     @Test
     public void regular_movie_for_1_day() {
-        Movie movie = new Movie("Gone with the wind", REGULAR);
+        RegularMovie movie = new RegularMovie("Gone with the wind");
         Rental rental = new Rental(movie, 2);
 
         customer.addRental(rental);
@@ -120,7 +119,7 @@ public class CustomerTest {
 
     @Test
     public void regular_movie_for_3_days() {
-        Movie movie = new Movie("Gone with the wind", REGULAR);
+        RegularMovie movie = new RegularMovie("Gone with the wind");
         Rental rental = new Rental(movie, 3);
 
         customer.addRental(rental);
@@ -130,7 +129,7 @@ public class CustomerTest {
 
     @Test
     public void regular_movie_for_4_days() {
-        Movie movie = new Movie("Gone with the wind", REGULAR);
+        RegularMovie movie = new RegularMovie("Gone with the wind");
         Rental rental = new Rental(movie, 4);
 
         customer.addRental(rental);
@@ -140,13 +139,13 @@ public class CustomerTest {
 
     @Test
     public void three_movies() {
-        Movie childrensMovie = new Movie("Bambi", CHILDRENS);
+        ChildrensMovie childrensMovie = new ChildrensMovie("Bambi");
         customer.addRental(new Rental(childrensMovie, 3));
 
-        Movie newReleaseMovie = new Movie("American Sniper", NEW_RELEASE);
+        NewMovie newReleaseMovie = new NewMovie("American Sniper");
         customer.addRental(new Rental(newReleaseMovie, 3));
 
-        Movie regularMovie = new Movie("Gone with the wind", REGULAR);
+        RegularMovie regularMovie = new RegularMovie("Gone with the wind");
         customer.addRental(new Rental(regularMovie, 4));
 
         StringBuilder expectedOverviewBuilder = new StringBuilder();
@@ -164,7 +163,7 @@ public class CustomerTest {
         assertEquals(expectedOverviewBuilder.toString(), customer.getRentalOverview());
     }
 
-    private void assertRentalOverview(Movie movie, double totalAmount, int frequentRenterPoints) {
+    private void assertRentalOverview(AbstractMovie movie, double totalAmount, int frequentRenterPoints) {
         StringBuilder expectedOverviewBuilder = new StringBuilder();
         expectedOverviewBuilder.append("Rental overview for John Doe\n");
         expectedOverviewBuilder.append("\n");

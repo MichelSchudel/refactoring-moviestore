@@ -2,9 +2,9 @@ package nl.craftsmen.moviestore;
 
 public class Rental {
     private final int daysRented;
-    private final Movie movie;
+    private final AbstractMovie movie;
 
-    public Rental(Movie movie, int daysRented) {
+    public Rental(AbstractMovie movie, int daysRented) {
         this.daysRented = daysRented;
         this.movie = movie;
     }
