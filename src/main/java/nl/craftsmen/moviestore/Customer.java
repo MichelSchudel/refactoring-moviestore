@@ -16,28 +16,36 @@ public class Customer {
     }
 
     public String getRentalOverview() {
-        double totalAmount = 0;
-        int frequentRenterPoints = 0;
         StringBuilder overviewBuilder = new StringBuilder();
 
         // Add header to overview
         overviewBuilder.append("Rental overview for " + name + "\n\n");
         for (Rental rental : rentals) {
-            frequentRenterPoints += rental.getFrequentRenterPoints();
-
-
-            // Add rental to overview
-            double amount = rental.getAmount();
-            overviewBuilder.append(String.format("%-20s %5.2f\n", rental.getMovie().getTitle(), amount));
-            totalAmount += amount;
+            overviewBuilder.append(String.format("%-20s %5.2f\n", rental.getMovie().getTitle(), rental.getAmount()));
         }
 
         // Add footer to overview
         overviewBuilder.append("==========================\n");
-        overviewBuilder.append(String.format("%-20s %5.2f\n", "Total", totalAmount));
+        overviewBuilder.append(String.format("%-20s %5.2f\n", "Total", getTotalAmount()));
         overviewBuilder.append("\n");
-        overviewBuilder.append("You earned " + frequentRenterPoints + " frequent renter points\n");
+        overviewBuilder.append("You earned " + getFrequentRenterPoints() + " frequent renter points\n");
         return overviewBuilder.toString();
+    }
+
+    private double getTotalAmount() {
+        double totalAmount = 0;
+        for (Rental rental : rentals) {
+            totalAmount += rental.getAmount();
+        }
+        return totalAmount;
+    }
+
+    private int getFrequentRenterPoints() {
+        int frequentRenterPoints = 0;
+        for (Rental rental : rentals) {
+            frequentRenterPoints += rental.getFrequentRenterPoints();
+        }
+        return frequentRenterPoints;
     }
 
 }
