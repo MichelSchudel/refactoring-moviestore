@@ -23,15 +23,8 @@ public class Customer {
         // Add header to overview
         overviewBuilder.append("Rental overview for " + name + "\n\n");
         for (Rental rental : rentals) {
+            frequentRenterPoints += rental.getFrequentRenterPoints();
 
-
-            // Add frequent renter points
-            frequentRenterPoints += 1;
-
-            // Add bonus for a two day new release rental
-            if (rental.getMovie().getPriceCode() == PriceCode.NEW_RELEASE && rental.getDaysRented() > 1) {
-                frequentRenterPoints++;
-            }
 
             // Add rental to overview
             double amount = rental.getAmount();
